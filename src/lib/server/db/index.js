@@ -1,16 +1,15 @@
-
 // src/lib/server/db/index.js
-import { drizzle } from 'drizzle-orm/mysql2';
-import mysql from 'mysql2/promise';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import pg from 'pg';
 import * as schema from './schema';
-import 'dotenv/config'; // .env 파일 로드
+import 'dotenv/config';
 
-// .env 파일의 변수들을 이용해 DB 연결 풀 생성
-const pool = mysql.createPool({
-	host: process.env.DATABASE_HOST,
-	user: process.env.DATABASE_USER,
-	password: process.env.DATABASE_PASSWORD,
-	database: process.env.DATABASE_NAME
+const { Pool } = pg;
+
+// Supabase는 보안을 위해 SSL 연결이 필수입니다.
+const pool = new Pool({
+	connectionString: process.env.DATABASE_URL,
+	ssl: true, 
 });
 
 export const db = drizzle(pool, { schema, mode: 'default' });
