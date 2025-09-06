@@ -12,7 +12,7 @@
 	<div class="graphic-content">
 		<!-- 실제 3D 그래픽이나 고품질 이미지가 들어갈 자리입니다. -->
 		<!-- 예시로 Svelte 로고 이미지 URL을 사용합니다. -->
-		<img src="musk.png" alt="img" />
+		<img src="apdomk.png" alt="img" />
 	</div>
 </section>
 
@@ -58,7 +58,6 @@
 	.graphic-content {
 		flex-shrink: 0;
 		/* 아래 스타일은 3D 그래픽을 돋보이게 하기 위함입니다. */
-		background: radial-gradient(circle, rgba(255,62,0,0.5) 0%, rgba(255,62,0,0) 60%);
 		padding: 2rem;
 		border-radius: 50%;
         z-index: 0;
