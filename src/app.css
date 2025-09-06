@@ -1,0 +1,31 @@
+/* src/routes/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap');
+
+:root {
+	--bg-color: #1a1d24;
+	--text-color: #e2e2e2;
+	--primary-color: #ff3e00;
+	--secondary-color: #676778;
+	--border-color: #333;
+
+	--font-serif: 'Playfair Display', serif;
+	--font-sans: 'Roboto', sans-serif;
+}
+
+body {
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	font-family: var(--font-sans);
+	margin: 0;
+	line-height: 1.6;
+}
+
+h1, h2, h3 {
+	font-family: var(--font-serif);
+	font-weight: 700;
+}
+
+a {
+	color: var(--primary-color);
+	text-decoration: none;
+}
