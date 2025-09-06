@@ -1,4 +1,3 @@
-<!-- src/routes/components/Header.svelte -->
 <script>
 	import { menuData } from '$lib/menuData.js';
 	import { page } from '$app/stores';
