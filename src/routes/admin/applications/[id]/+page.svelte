@@ -10,25 +10,28 @@
 	<div class="header-actions">
 		<a href="/admin/applications" class="back-link">&larr; 지원서 목록으로 돌아가기</a>
 		
+		<!-- 👇 (핵심 수정) on:click 이벤트를 button에 직접 추가합니다. -->
 		<form 
 			method="POST" 
 			action="?/deleteApplication"
 			use:enhance={() => {
-				if (!confirm(`${application.fullName}님의 지원서를 정말 삭제하시겠습니까?`)) {
-					return ({ cancel }) => cancel();
-				}
-				
-				// 👇 2. 폼 제출 완료 후 실행될 콜백을 추가합니다.
+				// 삭제 성공 후의 리다이렉트 처리만 담당합니다.
 				return async ({ result }) => {
-					// 3. 서버의 응답 타입이 'redirect'이면 (삭제 성공)
 					if (result.type === 'redirect') {
-						// 4. 서버가 지정한 경로(result.location)로 페이지를 이동시킵니다.
 						await goto(result.location);
 					}
 				};
 			}}
 		>
-			<button type="submit" class="delete-button">지원서 삭제</button>
+			<button 
+				type="submit" 
+				class="delete-button"
+				on:click={(event) => {
+					if (!confirm(`${application.fullName}님의 지원서를 정말 삭제하시겠습니까?`)) {
+						event.preventDefault(); // "아니요"를 누르면 폼 제출 자체를 막습니다.
+					}
+				}}
+			>지원서 삭제</button>
 		</form>
 	</div>
 

@@ -16,16 +16,13 @@
 		if (editorElement) {
 			quillInstance = new Quill(editorElement, {
 				theme: 'snow',
-				// 👇 여기도 동일하게 modules.toolbar 옵션을 수정합니다.
 				modules: {
 					toolbar: [
-						[{ header: [1, 2, 3, false] }],
-						[{ size: ['small', false, 'large', 'huge'] }],
-						['bold', 'italic', 'underline'],
-						[{ color: [] }, { background: [] }],
-						[{ list: 'ordered' }, { list: 'bullet' }],
-						['link', 'clean']
-					]
+						[{ header: [1, 2, 3, false] }], [{ size: ['small', false, 'large', 'huge'] }],
+						['bold', 'italic', 'underline'], [{ color: [] }, { background: [] }],
+						[{ list: 'ordered' }, { list: 'bullet' }], ['link', 'image', 'clean']
+					],
+					handlers: { /* 이미지 핸들러가 있다면 여기에 추가 */ }
 				}
 			});
 			quillInstance.root.innerHTML = contentHTML;
@@ -40,14 +37,12 @@
 	<header class="page-header">
 		<a href="/admin/announcements" class="back-link">&larr; 공지사항 관리로 돌아가기</a>
 		
-		<!-- 👇 바로 이 use:enhance 부분을 올바른 코드로 수정했습니다. -->
-		<form
-			method="POST"
+		<!-- =================== 삭제 기능 폼 =================== -->
+		<form 
+			method="POST" 
 			action="?/delete"
 			use:enhance={() => {
-				if (!confirm(`'${announcement.title}' 공지사항을 정말 삭제하시겠습니까?`)) {
-					return ({ cancel }) => cancel();
-				}
+				// 삭제 성공 후의 리다이렉트 처리만 담당
 				return async ({ result }) => {
 					if (result.type === 'redirect') {
 						await goto(result.location);
@@ -55,12 +50,21 @@
 				};
 			}}
 		>
-			<button type="submit" class="delete-button">삭제하기</button>
+			<button 
+				type="submit" 
+				class="delete-button"
+				on:click={(event) => {
+					if (!confirm(`'${announcement.title}' 공지사항을 정말 삭제하시겠습니까?`)) {
+						event.preventDefault(); // "아니요"를 누르면 폼 제출 자체를 막습니다.
+					}
+				}}
+			>삭제하기</button>
 		</form>
 	</header>
 
 	<h1>공지사항 수정</h1>
 
+	<!-- =================== 수정 기능 폼 =================== -->
 	<form class="announcement-form" method="POST" action="?/update" use:enhance>
 		<div class="form-group">
 			<label for="title">제목</label>
@@ -79,7 +83,6 @@
 		</div>
 	</form>
 </div>
-
 
 <style>
 	.page-container {

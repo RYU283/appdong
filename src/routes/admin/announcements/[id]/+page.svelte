@@ -36,29 +36,29 @@
 
 	<h1>공지사항 수정</h1>
 
-	<form class="announcement-form" method="POST" action="?/update" use:enhance>
-		<div class="form-group">
-			<label for="title">제목</label>
-			<input type="text" id="title" name="title" bind:value={announcement.title} required />
-		</div>
-		<div class="form-group">
-			<label for="content">내용</label>
-			<QuillEditor 
-				theme="snow" 
-				toolbar="full" 
-				bind:html={contentHTML} 
-			/>
-			<input type="hidden" name="content" value={contentHTML} />
-		</div>
-		
-		{#if form?.message}
-			<p class="error-message">{form.message}</p>
-		{/if}
-		
-		<div class="form-actions">
-			<button type="submit" class="submit-button">수정 완료</button>
-		</div>
-	</form>
+<form 
+    method="POST" 
+    action="?/deleteApplication"
+    use:enhance={({ cancel }) => { // 1. (핵심) cancel 함수를 여기서 직접 받습니다.
+        
+        // 2. 사용자에게 먼저 물어봅니다.
+        const isConfirmed = confirm(`${application.fullName}님의 지원서를 정말 삭제하시겠습니까?`);
+        
+        // 3. 사용자가 "취소(아니요)"를 누르면,
+        if (!isConfirmed) {
+            cancel(); // 4. 폼 제출 자체를 즉시 중단시킵니다.
+        }
+
+        // 5. 사용자가 "확인(예)"을 누른 경우에만, 폼 제출 후의 동작을 정의합니다.
+        return async ({ result }) => {
+            if (result.type === 'redirect') {
+                await goto(result.location);
+            }
+        };
+    }}
+>
+    <button type="submit" class="delete-button">지원서 삭제</button>
+</form>
 </div>
 
 <style>
