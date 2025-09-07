@@ -3,7 +3,7 @@
 	import { enhance, applyAction } from '$app/forms';
 	import { goto } from '$app/navigation';
 	// 👇 (핵심!) 중괄호 {} 없이 default export로 QuillEditor를 가져옵니다.
-	import QuillEditor from 'svelte-quill';
+	import Quill from 'quill';
 
 	export let data;
 	export let form;
