@@ -11,8 +11,8 @@
 			{ name: '이고은', phone: 'Youka1122@naver.com' },
 		],
 		social: {
-			instagram: 'https://instagram.com',
-			github: 'https://github.com',
+			instagram: 'https://www.instagram.com/knu.appdong',
+			github: 'https://github.com/APPDONG-KNU',
 			discord: 'https://discord.com'
 		}
 	};

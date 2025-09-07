@@ -97,8 +97,8 @@
 			<div class="nav-right">
 				<div class="icons">
 					<a href="https://discord.com"><img src="/dcimg.svg" alt="Discord" /></a>
-					<a href="https://github.com"><img src="/ghimg.svg" alt="GitHub" /></a>
-					<a href="https://instagram.com"><img src="/igimg.svg" alt="Instagram" /></a>
+					<a href="https://github.com/APPDONG-KNU"><img src="/ghimg.svg" alt="GitHub" /></a>
+					<a href="https://www.instagram.com/knu.appdong"><img src="/igimg.svg" alt="Instagram" /></a>
 				</div>
 				{#if user}
 					<span class="welcome-message">{user.name}님</span>
