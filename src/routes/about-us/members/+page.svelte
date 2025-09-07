@@ -28,7 +28,7 @@
 			name: '이경언',
 			department: '컴퓨터학부',
 			role: '교육부장',
-			imageUrl: 'https://placehold.co/400x400/252830/FFF?text=Gyeongeon'
+			imageUrl: '/gyeong.png'
 		},
 		{
 			name: '이화영',
