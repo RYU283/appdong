@@ -40,3 +40,16 @@ export const application = pgTable('application', {
 	finalWords: text('final_words'),
 	submittedAt: timestamp('submitted_at', { withTimezone: true }).notNull().defaultNow()
 });
+
+export const announcement = pgTable('announcement', {
+	id: varchar('id', { length: 255 }).primaryKey(),
+	title: varchar('title', { length: 255 }).notNull(),
+	content: text('content').notNull(),
+	
+	// 작성한 관리자 정보
+	authorId: varchar('author_id', { length: 255 }).references(() => user.id, { onDelete: 'set null' }),
+	authorName: varchar('author_name', { length: 255 }).notNull(),
+	attachments: text('attachments'), // 첨부파일 정보를 JSON 문자열 형태로 저장
+	// 작성 시간
+	createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow()
+});

@@ -5,6 +5,7 @@
 	import './styles.css';
 	import { isMenuOpen } from '$lib/stores.js';
 	import { onMount } from 'svelte';
+	import 'quill/dist/quill.snow.css';
 
 	export let data;
 

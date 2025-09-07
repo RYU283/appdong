@@ -1,13 +1,16 @@
-<!-- src/routes/admin/+page.svelte -->
 <script>
 	export let data;
-	const { stats, recentUsers, recentApps } = data;
+
+	// 👇 (핵심) 데이터가 없을 경우를 대비하여 기본값을 설정해 줍니다.
+	// `data.stats`가 없으면 `{}`를, `data.recentUsers`가 없으면 `[]`를 사용합니다.
+	const stats = data.stats || { totalUsers: 0, totalApps: 0 };
+	const recentUsers = data.recentUsers || [];
+	const recentApps = data.recentApps || [];
 </script>
 
 <div class="dashboard">
 	<h1>관리자 대시보드</h1>
 	
-	<!-- 1. 핵심 지표 카드 -->
 	<div class="stats-grid">
 		<div class="stat-card">
 			<h2>총 회원 수</h2>
@@ -21,10 +24,10 @@
 		</div>
 	</div>
 
-	<!-- 2. 최근 활동 목록 -->
 	<div class="recent-activity-grid">
 		<div class="activity-list">
 			<h3>최근 가입한 회원</h3>
+			<!-- 👇 (핵심) `#each`를 사용하기 전에 `length`를 먼저 확인하는 것이 더 안전합니다. -->
 			{#if recentUsers.length > 0}
 				<ul>
 					{#each recentUsers as user}
