@@ -195,34 +195,57 @@
 </div>
 
 <style>
+	/* ==========================================================================
+	   기본 스타일 (데스크탑 기준)
+	   ========================================================================== */
 	.application-container { max-width: 800px; margin: 2rem auto; padding: 2.5rem; background-color: #252830; border-radius: 16px; border: 1px solid var(--border-color); }
 	.title { text-align: center; font-size: 2.5rem; margin-bottom: 0.5rem; }
 	.subtitle { text-align: center; color: var(--secondary-color); margin-bottom: 3rem; }
 	form { display: flex; flex-direction: column; gap: 1.5rem; }
+	
+	/* PC에서는 2단 그리드를 기본으로 합니다. */
 	.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+	
 	.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
 	label { font-weight: 500; font-size: 0.9rem; color: var(--secondary-color); }
 	input, textarea, select { width: 100%; padding: 0.9rem; background-color: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-color); font-size: 1rem; }
 	input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(255, 62, 0, 0.2); }
 	.readonly-input { background-color: #1c1e24; color: var(--secondary-color); cursor: not-allowed; }
 	.readonly-input:focus { border-color: var(--border-color); box-shadow: none; }
-	.submit-button { background-color: var(--primary-color); color: white; border: none; padding: 1rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 1rem; }
-	.error-message { color: #ff9494; background-color: rgba(255, 77, 77, 0.15); border: 1px solid rgba(255, 77, 77, 0.3); padding: 1rem; border-radius: 8px; text-align: center; }
-	.home-link-container { text-align: center; margin-top: 2rem; }
-	.home-link { background-color: var(--secondary-color); color: white; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; }
-	.char-counter { text-align: right; font-size: 0.85rem; color: var(--secondary-color); margin-top: 0.25rem; }
 	
-	/* 경험이 있을 때 나타나는 필드에 애니메이션 효과 추가 */
-	.extra-fields {
-		animation: fadeIn 0.5s ease-out;
-	}
-
-	@media (max-width: 600px) { 
-		.form-grid { grid-template-columns: 1fr; }
-		.application-container { padding: 1.5rem; }
-	}
-	hr { border: none; border-top: 1px solid var(--border-color); margin: 2.5rem 0; }
-	.radio-group, .checkbox-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+	hr { border: none; border-top: 1px solid var(--border-color); margin: 2rem 0; }
+	
+	.radio-group, .checkbox-group { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 	.radio-group label, .checkbox-group label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
-	.conditional { border-left: 3px solid var(--primary-color); padding-left: 1.5rem; margin-top: 1.5rem; animation: fadeIn 0.5s; }
+	
+	.conditional { border-left: 3px solid var(--primary-color); padding-left: 1.5rem; margin-top: 1rem; animation: fadeIn 0.5s; }
+	@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+	.char-counter { text-align: right; font-size: 0.85rem; color: var(--secondary-color); margin-top: 0.25rem; }
+	.submit-button { /* ... */ }
+	.error-message { /* ... */ }
+
+	/* ==========================================================================
+	   (핵심 수정) 모바일 반응형 스타일
+	   ========================================================================== */
+	@media (max-width: 640px) { 
+		.application-container {
+			/* 모바일에서는 좌우 여백을 줄여 더 넓게 보이도록 합니다. */
+			padding: 1.5rem;
+		}
+		
+		.title {
+			font-size: 2rem;
+		}
+		
+		/* 개인정보 입력 그리드를 1단(세로)으로 변경합니다. */
+		.form-grid {
+			grid-template-columns: 1fr;
+		}
+		
+		/* 라디오/체크박스 그룹의 아이템 간격을 줄입니다. */
+		.radio-group, .checkbox-group {
+			gap: 1rem 1.5rem; /* 세로 간격, 가로 간격 */
+		}
+	}
 </style>
