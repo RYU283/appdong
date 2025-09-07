@@ -5,6 +5,7 @@
 	import Introduction from './components/Introduction.svelte';
 	import FeatureSection from './components/FeatureSection.svelte';
 	export let data; // load 함수로부터 데이터를 받습니다.
+    import { onMount } from 'svelte';
 </script>
 
 <!-- 각 섹션 컴포넌트들을 순서대로 배치합니다. -->

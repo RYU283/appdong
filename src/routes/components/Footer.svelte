@@ -2,12 +2,13 @@
 	// 푸터에 표시할 동아리 정보를 객체로 관리하면 나중에 수정하기 편합니다.
 	const clubInfo = {
 		name: 'APPDONG',
+		madeby: 'APPDONG 유준호',
 		copyrightYear: new Date().getFullYear(),
 		address: '대구광역시 북구 대학로 80, 경북대학교 백호관 610호',
 		email: '@knu.appdong',
-		president: { name: '송호민', phone: '010-1234-5678' },
+		president: { name: '송호민', phone: 'Homin@knu.ac.kr' },
 		vicePresidents: [
-			{ name: '유준호', phone: '010-9441-8685' },
+			{ name: '이고은', phone: 'Youka1122@naver.com' },
 		],
 		social: {
 			instagram: 'https://instagram.com',
@@ -41,7 +42,7 @@
 		<div class="footer-bottom">
 			<!-- 왼쪽 정보 (동아리 정보) -->
 			<div class="info-left">
-				<p class="made-by">Made by <strong>{clubInfo.name}</strong></p>
+				<p class="made-by">Made by <strong>{clubInfo.madeby}</strong></p>
 				<div class="details">
 					<p>{clubInfo.address}</p>
 					<p><a href="mailto:{clubInfo.email}">{clubInfo.email}</a></p>
@@ -55,7 +56,7 @@
 					<p>{clubInfo.president.name} {clubInfo.president.phone}</p>
 				</div>
 				<div class="contact-group">
-					<p class="role"><strong>웹 담당</strong></p>
+					<p class="role"><strong>부 회장</strong></p>
 					{#each clubInfo.vicePresidents as vice}
 						<p>{vice.name} {vice.phone}</p>
 					{/each}

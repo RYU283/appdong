@@ -47,6 +47,9 @@
 </div>
 
 <style>
+	.page-container {
+		width: 100%;
+	}
 	.page-header {
 		display: flex;
 		justify-content: space-between;
@@ -55,8 +58,14 @@
 		padding-bottom: 1rem;
 		border-bottom: 1px solid var(--border-color);
 	}
-	h1 { font-family: var(--font-serif); font-size: 2.2rem; margin: 0; }
-	p { color: var(--secondary-color); }
+	h1 {
+		font-family: var(--font-serif);
+		font-size: 2.2rem;
+		margin: 0;
+	}
+	p {
+		color: var(--secondary-color);
+	}
 	.create-button {
 		display: inline-flex;
 		align-items: center;
@@ -79,12 +88,38 @@
 		border-radius: 8px;
 		margin-top: 2rem;
 	}
-	table { width: 100%; border-collapse: collapse; }
-	th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
-	tr:last-child td { border-bottom: none; }
-	th { background-color: #2c2f38; font-weight: 500; color: var(--secondary-color); }
-	a { color: var(--text-color); text-decoration: none; }
-	a:hover { text-decoration: underline; }
-	.action-link { color: var(--primary-color); }
-	.empty-row { text-align: center; padding: 3rem; color: var(--secondary-color); }
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	th, td {
+		padding: 1rem;
+		text-align: left;
+		border-bottom: 1px solid var(--border-color);
+		white-space: nowrap;
+	}
+	tr:last-child td {
+		border-bottom: none;
+	}
+	th {
+		background-color: #2c2f38;
+		font-weight: 500;
+		color: var(--secondary-color);
+	}
+	a {
+		color: var(--text-color);
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	.action-link {
+		color: var(--primary-color);
+		font-weight: 500;
+	}
+	.empty-row {
+		text-align: center;
+		padding: 3rem;
+		color: var(--secondary-color);
+	}
 </style>
