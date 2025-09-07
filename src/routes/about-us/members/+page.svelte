@@ -1,5 +1,4 @@
 <script>
-	// 나중에 멤버 정보가 변경되면 이 배열만 수정하면 됩니다.
 	const leadership = [
 		{
 			name: '송호민',
@@ -112,7 +111,7 @@
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: 2rem;
 	}
-	/* 회장단은 더 적은 수이므로 중앙에 보기 좋게 배치 */
+	/* 회장단 배치 */
 	.leadership-grid {
 		max-width: 600px;
 		margin: 0 auto;
