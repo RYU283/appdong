@@ -6,13 +6,14 @@
 			department: '전자공학부',
 			role: '회장',
 			// 👇 나중에 실제 이미지 경로로 바꿔주세요. (예: '/images/members/homin.jpg')
-			imageUrl: 'https://placehold.co/400x400/252830/FFF?text=Homin'
+			// imageUrl: 'https://placehold.co/400x400/252830/FFF?text=Homin'
+            imageUrl: '/homin1.png'
 		},
 		{
 			name: '이고은',
 			department: '일어일문학과',
 			role: '부회장',
-			imageUrl: 'https://placehold.co/400x400/252830/FFF?text=Goeun'
+			imageUrl: '/goeun.jpeg'
 		}
 	];
 
@@ -39,7 +40,7 @@
 			name: '유준호',
 			department: '전자공학부',
 			role: '총무 및 웹, 서버관리', // 나중에 직책을 수정하세요.
-			imageUrl: 'https://placehold.co/400x400/252830/FFF?text=Junho'
+			imageUrl: '/junho.png'
 		},
 	];
 </script>
