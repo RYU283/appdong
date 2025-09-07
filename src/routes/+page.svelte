@@ -10,6 +10,15 @@
 
 <!-- 각 섹션 컴포넌트들을 순서대로 배치합니다. -->
 
+{#if data.user && data.user.role === 'ADMIN'}
+	<a href="/admin" class="admin-fab" title="관리자 페이지로 이동">
+		<!-- 설정 아이콘 SVG -->
+		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+		<span>관리자 페이지</span>
+	</a>
+{/if}
+
+
 
 <Hero />
 
@@ -149,4 +158,49 @@
 	.item-title-home { color: var(--text-color); }
 	.item-date-home { color: var(--secondary-color); }
 	.more-link { display: block; text-align: right; margin-top: 1rem; }
+	.admin-fab {
+		position: fixed; /* 화면에 고정 */
+		bottom: 2rem;
+		right: 2rem;
+		
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		
+		background-color: var(--primary-color);
+		color: white;
+		
+		padding: 0.8rem 1.5rem;
+		border-radius: 999px; /* 알약 모양 */
+		
+		font-weight: bold;
+		text-decoration: none;
+		
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+		z-index: 50; /* 다른 콘텐츠 위에 있도록 */
+		
+		transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+		animation: fadeIn 0.5s ease-out;
+	}
+
+	.admin-fab:hover {
+		transform: translateY(-4px) scale(1.05);
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	/* 모바일에서는 텍스트를 숨겨 아이콘만 보이게 할 수 있습니다. */
+	@media (max-width: 600px) {
+		.admin-fab {
+			padding: 0.9rem; /* 정사각형에 가깝게 */
+			border-radius: 50%; /* 원 모양 */
+		}
+		.admin-fab span {
+			display: none; /* 텍스트 숨김 */
+		}
+	}
 </style>

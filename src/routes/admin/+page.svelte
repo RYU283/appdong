@@ -1,129 +1,148 @@
 <script>
 	export let data;
-
-	// 👇 (핵심) 데이터가 없을 경우를 대비하여 기본값을 설정해 줍니다.
-	// `data.stats`가 없으면 `{}`를, `data.recentUsers`가 없으면 `[]`를 사용합니다.
-	const stats = data.stats || { totalUsers: 0, totalApps: 0 };
-	const recentUsers = data.recentUsers || [];
-	const recentApps = data.recentApps || [];
+	const { stats, recentUsers, recentApps, recentAnns } = data;
 </script>
 
 <div class="dashboard">
-	<h1>관리자 대시보드</h1>
+	<h1 class="dashboard-title">관리자 대시보드</h1>
 	
+	<!-- 1. 핵심 지표 카드 (3단 그리드) -->
 	<div class="stats-grid">
 		<div class="stat-card">
-			<h2>총 회원 수</h2>
+			<h2 class="card-title">총 회원 수</h2>
 			<p class="stat-number">{stats.totalUsers}</p>
-			<a href="/admin/users">회원 관리 바로가기 &rarr;</a>
+			<a href="/admin/users" class="card-link">회원 관리 바로가기 &rarr;</a>
 		</div>
 		<div class="stat-card">
-			<h2>총 지원서 수</h2>
+			<h2 class="card-title">총 지원서 수</h2>
 			<p class="stat-number">{stats.totalApps}</p>
-			<a href="/admin/applications">지원서 조회 바로가기 &rarr;</a>
+			<a href="/admin/applications" class="card-link">지원서 조회 바로가기 &rarr;</a>
+		</div>
+		<div class="stat-card">
+			<h2 class="card-title">총 공지사항 수</h2>
+			<p class="stat-number">{stats.totalAnns}</p>
+			<a href="/admin/announcements" class="card-link">공지사항 관리 바로가기 &rarr;</a>
 		</div>
 	</div>
 
+	<!-- 2. 최근 활동 목록 (카드 디자인 통일) -->
 	<div class="recent-activity-grid">
-		<div class="activity-list">
-			<h3>최근 가입한 회원</h3>
-			<!-- 👇 (핵심) `#each`를 사용하기 전에 `length`를 먼저 확인하는 것이 더 안전합니다. -->
+		<div class="activity-card">
+			<h3 class="card-title">최근 가입한 회원</h3>
 			{#if recentUsers.length > 0}
-				<ul>
+				<ul class="activity-list">
 					{#each recentUsers as user}
-						<li><strong>{user.name}</strong> ({user.username})</li>
+						<li><a href="/admin/users/{user.id}"><strong>{user.name}</strong> ({user.username})</a></li>
 					{/each}
 				</ul>
 			{:else}
-				<p>최근 가입한 회원이 없습니다.</p>
+				<p class="empty-text">최근 가입한 회원이 없습니다.</p>
 			{/if}
 		</div>
-		<div class="activity-list">
-			<h3>최근 제출된 지원서</h3>
+		<div class="activity-card">
+			<h3 class="card-title">최근 제출된 지원서</h3>
 			{#if recentApps.length > 0}
-				<ul>
+				<ul class="activity-list">
 					{#each recentApps as app}
-						<li><a href={`/admin/applications/${app.id}`}><strong>{app.fullName}</strong> ({new Date(app.submittedAt).toLocaleDateString()})</a></li>
+						<li><a href={`/admin/applications/${app.id}`}><strong>{app.fullName}</strong> ({new Date(app.submittedAt).toLocaleDateString('ko-KR')})</a></li>
 					{/each}
 				</ul>
 			{:else}
-				<p>제출된 지원서가 없습니다.</p>
+				<p class="empty-text">제출된 지원서가 없습니다.</p>
+			{/if}
+		</div>
+		<div class="activity-card">
+			<h3 class="card-title">최근 공지사항</h3>
+			{#if recentAnns.length > 0}
+				<ul class="activity-list">
+					{#each recentAnns as ann}
+						<li><a href={`/admin/announcements/${ann.id}/edit`}><strong>{ann.title}</strong> ({new Date(ann.createdAt).toLocaleDateString('ko-KR')})</a></li>
+					{/each}
+				</ul>
+			{:else}
+				<p class="empty-text">작성된 공지사항이 없습니다.</p>
 			{/if}
 		</div>
 	</div>
 </div>
 
 <style>
-	h1 {
+	.dashboard-title {
+		font-family: var(--font-serif);
 		font-size: 2.2rem;
-		margin-bottom: 2rem;
+		margin: 0 0 2.5rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--border-color);
 	}
 
-	.stats-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		gap: 2rem;
-		margin-bottom: 3rem;
-	}
-
-	.stat-card {
+	/* --- 공통 카드 스타일 --- */
+	.stat-card, .activity-card {
 		background-color: #2c2f38;
 		padding: 2rem;
 		border-radius: 12px;
 		border: 1px solid var(--border-color);
 	}
-	.stat-card h2 {
+	.card-title {
 		margin-top: 0;
-		font-size: 1.2rem;
+		font-size: 1.1rem;
+		font-weight: 500;
 		color: var(--secondary-color);
+	}
+
+	/* --- 핵심 지표 카드 --- */
+	.stats-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 2.5rem;
 	}
 	.stat-number {
 		font-size: 3.5rem;
-		font-weight: bold;
+		font-weight: 700;
 		color: var(--text-color);
 		margin: 1rem 0;
 	}
-	.stat-card a {
+	.card-link {
 		color: var(--primary-color);
 		text-decoration: none;
 		font-weight: 500;
 	}
 
+	/* --- 최근 활동 카드 --- */
 	.recent-activity-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 2rem;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
 	}
-
 	.activity-list {
-		background-color: #2c2f38;
-		padding: 2rem;
-		border-radius: 12px;
-		border: 1px solid var(--border-color);
-	}
-	.activity-list h3 {
-		margin-top: 0;
-		border-bottom: 1px solid var(--border-color);
-		padding-bottom: 1rem;
-		margin-bottom: 1rem;
-	}
-	.activity-list ul {
 		list-style: none;
 		padding: 0;
-		margin: 0;
+		margin: 1.5rem 0 0;
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
 	}
 	.activity-list a {
+		display: block;
 		text-decoration: none;
 		color: var(--text-color);
+		padding: 0.5rem;
+		margin: -0.5rem;
+		border-radius: 6px;
+		transition: background-color 0.2s;
 	}
 	.activity-list a:hover {
-		text-decoration: underline;
+		background-color: rgba(255, 255, 255, 0.05);
+	}
+	.activity-list strong {
+		font-weight: 500;
+	}
+	.empty-text {
+		color: var(--secondary-color);
+		margin-top: 1.5rem;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 900px) {
 		.recent-activity-grid {
 			grid-template-columns: 1fr;
 		}
