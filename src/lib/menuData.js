@@ -7,7 +7,7 @@ export const menuData = [
 				links: [
 					{ text: '동아리 소개', path: '/about-us/intro' },
 					// { text: '활동 내용', path: '/about-us/activities' },
-					{ text: '임원진', path: '/about-us/members' }
+					{ text: '조직도', path: '/about-us/members' }
 				]
 			}
 		]
