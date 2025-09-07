@@ -1,4 +1,3 @@
-<!-- src/routes/accession/application/+page.svelte -->
 <script>
 	import { enhance, applyAction } from '$app/forms';
 	export let data;
@@ -12,9 +11,18 @@
 		name: '', phone_number: '', department: '', student_id: ''
 	};
 	
-	// 프로그래밍 경험 선택에 따라 하위 필드를 보여주기 위한 변수
+	// 👇 (핵심!) 누락되었던 폼 상태 변수들을 모두 선언합니다.
 	let programmingExperience = '';
 	let motivationText = '';
+	let activityChoice = ''; // 이 변수가 누락되었습니다.
+	let studySubjects = [];
+	let bootcampMemberLangs = [];
+	let bootcampMentorLangs = [];
+
+	// 옵션 데이터를 배열로 관리하여 코드 중복을 줄임
+	const studyOptions = ['알고리즘', '자료구조', 'C', 'C++', 'Python', 'Java'];
+	const bootcampMemberOptions = ['Java', 'JavaScript', 'Kotlin'];
+	const bootcampMentorOptions = ['JavaScript', 'Kotlin', 'Swift', 'C#'];
 </script>
 
 <div class="application-container">
@@ -67,7 +75,7 @@
 			<div class="form-group">
 				<label>프로그래밍 언어 경험</label>
 				<select name="programmingExperience" bind:value={programmingExperience} required>
-					<option value="" disabled selected>선택하세요</option>
+					<option value="" disabled>선택하세요</option>
 					<option value="거의 없음">거의 없음</option>
 					<option value="보통">보통</option>
 					<option value="숙련자">숙련자</option>
@@ -84,6 +92,93 @@
 					<textarea id="specificExperience" name="specificExperience" rows="6" placeholder="진행했던 프로젝트, 사용 기술 스택, 기여한 부분 등을 자유롭게 서술해주세요."></textarea>
 				</div>
 			{/if}
+
+			<div class="form-group">
+				<label>GitHub 사용 경험 유무</label>
+				<div class="radio-group">
+					<label><input type="radio" name="githubExperience" value="유" required /> 유</label>
+					<label><input type="radio" name="githubExperience" value="무" /> 무</label>
+				</div>
+			</div>
+
+			<!-- 2. 참가할 활동 선택 -->
+			<div class="form-group">
+				<label>참가할 활동</label>
+				<select name="activityChoice" bind:value={activityChoice} required>
+					<option value="" disabled>선택하세요</option>
+					<option value="Vibe 클래스">Vibe 클래스</option>
+					<option value="스터디">스터디</option>
+					<option value="부트캠프 (일반)">부트캠프 (일반)</option>
+					<option value="부트캠프 (멘토)">부트캠프 (멘토)</option>
+				</select>
+			</div>
+			
+			<!-- =================== 조건부 질문들 =================== -->
+			
+			{#if activityChoice === 'Vibe 클래스'}
+				<div class="form-group conditional">
+					<label for="vibeServiceIdea">만들고 싶은 서비스 아이디어</label>
+					<textarea id="vibeServiceIdea" name="vibeServiceIdea" rows="4"></textarea>
+				</div>
+			{/if}
+
+			{#if activityChoice === '스터디'}
+				<div class="form-group conditional">
+					<label>배우고 싶은 스터디 과목 (중복 선택 가능)</label>
+					<div class="checkbox-group">
+						{#each studyOptions as subject}
+							<label><input type="checkbox" name="studySubjects" value={subject} bind:group={studySubjects}/> {subject}</label>
+						{/each}
+					</div>
+				</div>
+			{/if}
+
+			{#if activityChoice === '부트캠프 (일반)'}
+				<div class="conditional">
+					<div class="form-group">
+						<label for="bootcampProjectIdea">진행하고 싶은 프로젝트 주제</label>
+						<textarea id="bootcampProjectIdea" name="bootcampProjectIdea" rows="4"></textarea>
+					</div>
+					<div class="form-group">
+						<label>사용하고 싶은 언어 (중복 선택 가능)</label>
+						<div class="checkbox-group">
+							{#each bootcampMemberOptions as lang}
+								<label><input type="checkbox" name="bootcampMemberLangs" value={lang} bind:group={bootcampMemberLangs}/> {lang}</label>
+							{/each}
+							<label><input type="checkbox" name="bootcampMemberLangs" value="기타" bind:group={bootcampMemberLangs}/> 기타</label>
+						</div>
+						{#if bootcampMemberLangs.includes('기타')}
+							<input type="text" name="bootcampMemberLangsOther" placeholder="기타 언어 직접 입력" />
+						{/if}
+					</div>
+				</div>
+			{/if}
+
+			{#if activityChoice === '부트캠프 (멘토)'}
+				<div class="conditional">
+					<div class="form-group">
+						<label>지도 가능한 언어 (중복 선택 가능)</label>
+						<div class="checkbox-group">
+							{#each bootcampMentorOptions as lang}
+								<label><input type="checkbox" name="bootcampMentorLangs" value={lang} bind:group={bootcampMentorLangs}/> {lang}</label>
+							{/each}
+							<label><input type="checkbox" name="bootcampMentorLangs" value="기타" bind:group={bootcampMentorLangs}/> 기타</label>
+						</div>
+						{#if bootcampMentorLangs.includes('기타')}
+							<input type="text" name="bootcampMentorLangsOther" placeholder="기타 언어 직접 입력" />
+						{/if}
+					</div>
+					<div class="form-group">
+						<label for="mentorAvailableTime">지도 가능 시간대</label>
+						<textarea id="mentorAvailableTime" name="mentorAvailableTime" rows="3"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="mentorExperience">멘토링 관련 경험</label>
+						<textarea id="mentorExperience" name="mentorExperience" rows="5"></textarea>
+					</div>
+				</div>
+			{/if}
+
 
 			<div class="form-group">
 				<label for="finalWords">마지막으로 할 말 (선택)</label>
@@ -126,4 +221,8 @@
 		.form-grid { grid-template-columns: 1fr; }
 		.application-container { padding: 1.5rem; }
 	}
+	hr { border: none; border-top: 1px solid var(--border-color); margin: 2.5rem 0; }
+	.radio-group, .checkbox-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+	.radio-group label, .checkbox-group label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+	.conditional { border-left: 3px solid var(--primary-color); padding-left: 1.5rem; margin-top: 1.5rem; animation: fadeIn 0.5s; }
 </style>

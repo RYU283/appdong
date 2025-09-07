@@ -34,7 +34,7 @@
 			name: '이화영',
 			department: '에너지공학부',
 			role: '홍보부장',
-			imageUrl: 'https://placehold.co/400x400/252830/FFF?text=Hwayeong'
+			imageUrl: '/hwayeong.png'
 		},
 		{
 			name: '유준호',

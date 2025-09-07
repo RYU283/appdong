@@ -34,19 +34,28 @@ export const actions = {
 		const formData = await request.formData();
 		const data = Object.fromEntries(formData);
 
-		// 로그인 상태일 때만, 이미 제출했는지 다시 한번 확인 (중복 제출 방지)
 		if (user) {
 			const [existingApp] = await db.select().from(appTable).where(eq(appTable.userId, user.id));
 			if (existingApp) { return fail(403, { message: '이미 지원서를 제출했습니다.' }); }
 		}
 		
-		// ... (모든 필드에 대한 유효성 검사는 이전과 동일하게 유지)
+		// 필수 필드 유효성 검사
+		const requiredFields = ['fullName', 'phoneNumber', 'university', 'department', 'studentId', 'motivation', 'githubExperience', 'activityChoice'];
+		for (const field of requiredFields) {
+			if (!data[field]) {
+				return fail(400, { message: `필수 항목인 '${field}'을(를) 채워주세요.` });
+			}
+		}
 		
+		// 체크박스 데이터는 별도로 처리
+		const studySubjects = formData.getAll('studySubjects');
+		const bootcampMemberLangs = formData.getAll('bootcampMemberLangs');
+		const bootcampMentorLangs = formData.getAll('bootcampMentorLangs');
+
 		const applicationId = `app_${nanoid(15)}`;
 		await db.insert(appTable).values({
 			id: applicationId,
-			// 👇 userId는 로그인 상태일 때만 넣고, 아니면 null을 넣습니다.
-			userId: user ? user.id : null, 
+			userId: user ? user.id : null,
 			fullName: data.fullName,
 			phoneNumber: data.phoneNumber,
 			university: data.university,
@@ -54,6 +63,17 @@ export const actions = {
 			studentId: data.studentId,
 			motivation: data.motivation,
 			programmingExperience: data.programmingExperience,
+			githubExperience: data.githubExperience,
+			activityChoice: data.activityChoice,
+			vibeServiceIdea: data.vibeServiceIdea || null,
+			studySubjects: JSON.stringify(studySubjects),
+			bootcampProjectIdea: data.bootcampProjectIdea || null,
+			bootcampMemberLangs: JSON.stringify(bootcampMemberLangs),
+			bootcampMemberLangsOther: data.bootcampMemberLangsOther || null,
+			bootcampMentorLangs: JSON.stringify(bootcampMentorLangs),
+			bootcampMentorLangsOther: data.bootcampMentorLangsOther || null,
+			mentorAvailableTime: data.mentorAvailableTime || null,
+			mentorExperience: data.mentorExperience || null,
 			knownFields: data.knownFields || null,
 			specificExperience: data.specificExperience || null,
 			finalWords: data.finalWords || null
