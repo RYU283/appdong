@@ -1,8 +1,8 @@
 <!-- src/routes/components/Hero.svelte -->
 <section class="hero-section">
 	<div class="text-content">
-		<h1>No Code<br>
-            No Life
+		<h1>Hello,<br>
+            APPDONG!
         </h1>
 		<h2>경북대학교 중앙동아리 앱동</h2>
 		<a href="/accession" class="cta-button">
