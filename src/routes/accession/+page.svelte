@@ -54,17 +54,17 @@
 		<h2 class="section-title">2025-2학기 모집 일정</h2>
 		<div class="schedule-grid">
 			<div class="schedule-item">
-				<div class="date">9.8 (일) ~ 9.10 (화)</div>
+				<div class="date">9.9 (화) ~ 9.10 (수)</div>
 				<div class="event">서류 모집</div>
 				<div class="description">온라인 지원서를 통해 접수</div>
 			</div>
 			<div class="schedule-item">
-				<div class="date">9.11 (수)</div>
+				<div class="date">9.11 (목)</div>
 				<div class="event">서류 결과 발표</div>
 				<div class="description">합격자 개별 연락</div>
 			</div>
 			<div class="schedule-item">
-				<div class="date">~ 9.12 (목)</div>
+				<div class="date">~ 9.12 (금)</div>
 				<div class="event">최종 등록 (회비 입금)</div>
 				<div class="description">기한 내 입금 시 최종 합격</div>
 			</div>
