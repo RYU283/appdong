@@ -103,7 +103,7 @@
 								on:click={() => (showPassword = !showPassword)}
 								aria-label={showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
 							>
-								<img src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'} alt="toggle password visibility" />
+								<img src={showPassword ? '/eye.png' : '/eye.png'} alt="toggle password visibility" />
 							</button>
 						</div>
 					</div>

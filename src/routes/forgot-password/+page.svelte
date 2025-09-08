@@ -100,7 +100,7 @@
 						<div class="password-input-wrapper">
 							<input type={showPassword ? 'text' : 'password'} id="password" name="password" placeholder="비밀번호 (6자 이상)" required bind:value={password}/>
 							<button type="button" class="toggle-password" on:click={() => (showPassword = !showPassword)} aria-label="비밀번호 보기/숨기기">
-								<img src={showPassword ? '/icons/eye-off.svg' : '/icons/eye.svg'} alt="toggle visibility" />
+								<img src={showPassword ? '/eye.png' : '/eye.png'} alt="toggle visibility" />
 							</button>
 						</div>
 					</div>
