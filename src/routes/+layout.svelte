@@ -34,11 +34,11 @@
 	<meta name="description" content="APPDONG 동아리 공식 웹사이트입니다." />
 	<!-- OG Image: 미리보기 카드에 표시될 대표 이미지 -->
 	<!-- 이미지 경로는 static 폴더에 있는 파일을 직접 가리킵니다. (절대 경로 사용) -->
-	<meta property="og:title" content="Official AppDong Club Page" />
+	<meta property="og:title" content="AppDong Club Page" />
 	
 	<!-- OG Description: 미리보기 카드에 표시될 설명 -->
 	<meta property="og:description" content="열정있는 당신, 그리고 누구나" />
-	<meta property="og:image" content="/apdomk" />
+	<meta property="og:image" content="https://www.appdong.com/apdomk.png" />
 	
 	<!-- OG URL: 공유될 페이지의 표준 URL (실제 사이트 주소로 변경) -->
 	<meta property="og:url" content="https://www.appdong.com/" />
