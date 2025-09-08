@@ -1,11 +1,11 @@
 export const menuData = [
 	{
 		title: 'About Us',
-		path: '', 
+		path: '/about-us', 
 		columns: [
 			{
 				links: [
-					{ text: '동아리 소개', path: '/about-us/intro' },
+					{ text: '동아리 소개', path: '/about-us' },
 					// { text: '활동 내용', path: '/about-us/activities' },
 					{ text: '조직도', path: '/about-us/members' }
 				]
