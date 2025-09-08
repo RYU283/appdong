@@ -23,6 +23,19 @@
 	}
 </script>
 
+<svelte:head>
+	<!-- 1. 모든 페이지의 기본 타이틀을 설정합니다. -->
+	<title>AppDong Club Page</title>
+	
+	<!-- 2. 파비콘(Favicon)을 설정합니다. -->
+	<!-- static 폴더에 있는 파일은 `/` 로 바로 접근할 수 있습니다. -->
+	<link rel="icon" href="/apdomk.png" />
+	
+	<!-- 3. (선택사항) SEO 및 공유를 위한 메타 태그 -->
+	<meta name="description" content="APPDONG 동아리 공식 웹사이트입니다." />
+</svelte:head>
+
+
 {#if $isMenuOpen}
 	<div class="overlay" on:click={() => isMenuOpen.set(false)} on:keydown={() => {}} role="button" tabindex="0"/>
 {/if}
