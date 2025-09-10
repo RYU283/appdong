@@ -7,7 +7,7 @@ export default {
     out: "./drizzle",
     dialect: 'postgresql', // mysql -> postgresql
     dbCredentials: {
-      // host, user 등이 아닌 URL 하나만 사용합니다.
+
       url: process.env.DATABASE_URL,
     }
 };
