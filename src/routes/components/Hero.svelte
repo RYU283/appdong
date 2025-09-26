@@ -6,7 +6,7 @@
         </h1>
 		<h2>경북대학교 중앙동아리 앱동</h2>
 		<a href="/accession" class="cta-button">
-			2025년 2학기 부원 모집중 →
+		
 		</a>
 	</div>
 	<div class="graphic-content">
