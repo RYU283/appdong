@@ -13,7 +13,7 @@
 		social: {
 			instagram: 'https://www.instagram.com/knu.appdong',
 			github: 'https://github.com/APPDONG-KNU',
-			discord: 'https://discord.com'
+			discord: 'https://appdong.com/egg'
 		}
 	};
 </script>
